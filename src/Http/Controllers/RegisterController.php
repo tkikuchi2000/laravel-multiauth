@@ -95,7 +95,7 @@ class RegisterController extends Controller
             try {
                 $admin->notify(new RegistrationNotification($password));
             } catch (\Exception $e) {
-                request()->session()->flash('message', 'Email not sent properly, Please check your mail configurations');
+                request()->session()->flash('message', trans('laravel-multiauth::messages.mail-not-send'));
             }
         }
     }
@@ -119,7 +119,7 @@ class RegisterController extends Controller
         $admin->update($request->except('role_id'));
         $admin->roles()->sync(request('role_id'));
 
-        return redirect(route('admin.show'))->with('message', "{$admin->name} details are successfully updated");
+        return redirect(route('admin.show'))->with('message', trans('laravel-multiauth::messages.regist-details-update', ['name' => $admin->name]));
     }
 
     public function destroy(Admin $admin)
@@ -127,6 +127,6 @@ class RegisterController extends Controller
         $prefix = config('multiauth.prefix');
         $admin->delete();
 
-        return redirect(route('admin.show'))->with('message', "You have deleted {$prefix} successfully");
+        return redirect(route('admin.show'))->with('message', trans('laravel-multiauth::messages.regist-delete', compact('prefix')));
     }
 }

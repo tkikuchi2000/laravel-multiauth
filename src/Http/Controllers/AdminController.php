@@ -44,6 +44,6 @@ class AdminController extends Controller
         ]);
         auth()->user()->update(['password' => bcrypt($data['password'])]);
 
-        return redirect(route('admin.home'))->with('message', 'Your password is changed successfully');
+        return redirect(route('admin.home'))->with('message', trans('laravel-multiauth::messages.password-change'));
     }
 }

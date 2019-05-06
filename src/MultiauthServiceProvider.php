@@ -147,6 +147,10 @@ class MultiauthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/routes/routes.php' => base_path("routes/{$prefix}.php"),
         ], 'multiauth:routes');
+        $this->loadTranslationsFrom(__DIR__.'/lang', 'laravel-multiauth');
+        $this->publishes([
+            __DIR__.'/lang' => resource_path('lang/vendor/multiauth'),
+        ], 'multiauth:lang');
     }
 
     protected function loadBladeSyntax()

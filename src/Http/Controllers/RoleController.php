@@ -37,7 +37,7 @@ class RoleController extends Controller
         $request->validate(['name' => 'required']);
         Role::create($request->all());
 
-        return redirect(route('admin.roles'))->with('message', 'New Role is stored successfully successfully');
+        return redirect(route('admin.roles'))->with('message', trans('laravel-multiauth::messages.role-store'));
     }
 
     public function update(Role $role, Request $request)
@@ -46,13 +46,13 @@ class RoleController extends Controller
 
         $role->update($request->all());
 
-        return redirect(route('admin.roles'))->with('message', 'You have updated Role successfully');
+        return redirect(route('admin.roles'))->with('message', trans('laravel-multiauth::messages.role-update'));
     }
 
     public function destroy(Role $role)
     {
         $role->delete();
 
-        return redirect()->back()->with('message', 'You have deleted Role successfully');
+        return redirect()->back()->with('message', trans('laravel-multiauth::messages.role-delete'));
     }
 }
